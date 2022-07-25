@@ -19,7 +19,7 @@ The [mgos_bthing_get_state()](https://github.com/diy365-mgos/bthing#mgos_bthing_
 |Key|Type||
 |--|--|--|
 |accuracy|decimal|The accuracy of the estimated location, in meters. This represents the radius of a circle around the given location.|
-|location|[bVariantDictionary](https://github.com/diy365-mgos/bvar-dic)|A [GPS location dictionary](#gps_location_dictionary).|
+|location|[bVariantDictionary](https://github.com/diy365-mgos/bvar-dic)|A [GPS location dictionary](#gps-location-dictionary).|
 #### GPS location dictionary
 |Key|Type||
 |--|--|--|
