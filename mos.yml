@@ -1,0 +1,27 @@
+author: DIY365
+type: lib
+description: Mongoose OS bGPSSensor Library
+version: 1.0
+
+sources:
+  - src
+
+includes:
+  - include
+
+filesystem:
+  - fs
+
+config_schema:
+  - ["bgpssens", "o", {title: "GPS sensor config"}]
+  - ["bgpssens.sensor_id", "s", "gps", {title: "Sensor ID"}]
+  - ["bgpssens.sensor_dom", "s", "", {title: "Sensor domain"}]
+
+libs:
+  - origin: https://github.com/diy365-mgos/bsensor
+  - origin: https://github.com/diy365-mgos/bgps
+
+tags:
+  - c
+
+manifest_version: 2017-09-29
