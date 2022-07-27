@@ -1,6 +1,8 @@
 #include "mgos.h"
 #include "mgos_bgpssens.h"
 #include "mgos_bgps.h"
+#include "mgos_bvar.h"
+#include "mgos_bvar_dic.h"
 
 #ifdef MGOS_HAVE_MJS
 #include "mjs.h"
