@@ -22,8 +22,8 @@ static void mg_gps_position_changed(int ev, void *ev_data, void *userdata) {
     // update accuracy
     mgos_bvar_set_key_decimal(state.value, "accuracy", data->cur_pos.accuracy);
     // update latitude and longitude
-    mgos_bvarc_t location_key = NULL;
-    if (!mgos_bvarc_try_get_key(state.value, "location", &location_key)) {
+    mgos_bvar_t location_key = NULL;
+    if (!mgos_bvar_try_get_key(state.value, "location", &location_key)) {
       location_key = mgos_bvar_new_dic();
       if (!mgos_bvar_add_key(state.value, "location", location_key)){
         mgos_bvar_free(location_key);
