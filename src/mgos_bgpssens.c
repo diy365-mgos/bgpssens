@@ -21,29 +21,28 @@ static void mg_gps_position_changed(int ev, void *ev_data, void *userdata) {
   if (mgos_bthing_start_update_state(MGOS_BSENSOR_THINGCAST(s_sensor), &state)) {
     // update accuracy
     mgos_bvar_set_key_decimal(state.value, "accuracy", data->cur_pos.accuracy);
+    
     // update latitude and longitude
     mgos_bvar_t location_key = NULL;
-    // if (!mgos_bvar_try_get_key(state.value, "location", &location_key)) {
-    //   location_key = mgos_bvar_new_dic();
-    //   if (!mgos_bvar_add_key(state.value, "location", location_key)){
-    //     mgos_bvar_free(location_key);
-    //     location_key = NULL;
-    //     LOG(LL_ERROR, ("Error adding the 'location' value to the state."));
-    //   }
-    // }
-
+    if (!mgos_bvar_try_get_key(state.value, "location", &location_key)) {
+      location_key = mgos_bvar_new_dic();
+      if (!mgos_bvar_add_key(state.value, "location", location_key)){
+        mgos_bvar_free(location_key);
+        location_key = NULL;
+        LOG(LL_ERROR, ("Error adding the 'location' value to the state."));
+      }
+    }
     if (location_key != NULL) {
       mgos_bvar_set_key_decimal(location_key, "lat", data->cur_pos.location.latitude);
       mgos_bvar_set_key_decimal(location_key, "lng", data->cur_pos.location.longitude);
     }
 
-    LOG(LL_INFO, ("accuracy: %f",  mgos_bvar_get_decimal(mgos_bvar_get_key(state.value, "accuracy"))));
-
-    location_key = NULL;
-    if (mgos_bvar_try_get_key(state.value, "location", &location_key)) {
-      LOG(LL_INFO, ("lat: %f",  mgos_bvar_get_decimal(mgos_bvar_get_key(location_key, "lat"))));
-      LOG(LL_INFO, ("lng: %f",  mgos_bvar_get_decimal(mgos_bvar_get_key(location_key, "lng"))));
-    }
+    // location_key = NULL;
+    // LOG(LL_INFO, ("accuracy: %f",  mgos_bvar_get_decimal(mgos_bvar_get_key(state.value, "accuracy"))));
+    // if (mgos_bvar_try_get_key(state.value, "location", &location_key)) {
+    //   LOG(LL_INFO, ("lat: %f",  mgos_bvar_get_decimal(mgos_bvar_get_key(location_key, "lat"))));
+    //   LOG(LL_INFO, ("lng: %f",  mgos_bvar_get_decimal(mgos_bvar_get_key(location_key, "lng"))));
+    // }
 
     mgos_bthing_end_update_state(state);
   }
