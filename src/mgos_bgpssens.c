@@ -38,12 +38,12 @@ static void mg_gps_position_changed(int ev, void *ev_data, void *userdata) {
       
     }
 
-    LOG(LL_INFO, ("accuracy: %f",  mgos_bvar_get_key_decimal(state.value, "accuracy")));
+    LOG(LL_INFO, ("accuracy: %f",  mgos_bvar_get_decimal(mgos_bvar_get_key(state.value, "accuracy"))));
 
     location_key = NULL;
     if (mgos_bvar_try_get_key(state.value, "location", &location_key)) {
-      LOG(LL_INFO, ("lat: %f",  mgos_bvar_get_key_decimal(location_key, "lat")));
-      LOG(LL_INFO, ("lng: %f",  mgos_bvar_get_key_decimal(location_key, "lng")));
+      LOG(LL_INFO, ("lat: %f",  mgos_bvar_get_decimal(mgos_bvar_get_key(location_key, "lat"))));
+      LOG(LL_INFO, ("lng: %f",  mgos_bvar_get_decimal(mgos_bvar_get_key(location_key, "lng"))));
     }
 
     mgos_bthing_end_update_state(state);
